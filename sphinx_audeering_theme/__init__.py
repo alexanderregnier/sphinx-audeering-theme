@@ -89,7 +89,6 @@ def setup(app):
 def _run(shell_command):
     """Return the output of a shell command provided as string."""
     process = subprocess.Popen(
-        shell_command, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True
-    )
+        shell_command, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=False)
     stdout, sterr = process.communicate()
     return stdout.decode("utf-8").rstrip()
