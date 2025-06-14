@@ -3,6 +3,7 @@
 import os
 import re
 import subprocess
+from security import safe_command
 
 
 def get_html_theme_path():
@@ -88,8 +89,7 @@ def setup(app):
 
 def _run(shell_command):
     """Return the output of a shell command provided as string."""
-    process = subprocess.Popen(
-        shell_command, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True
+    process = safe_command.run(subprocess.Popen, shell_command, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True
     )
     stdout, sterr = process.communicate()
     return stdout.decode("utf-8").rstrip()
